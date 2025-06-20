@@ -1,3 +1,75 @@
+# Dépendances Node.js
 node_modules/
 package-lock.json
-package.json
+
+# Fichiers de configuration sensibles
+config/stripe.php
+config/paypal.php
+config/database.php
+
+# Dépendances Composer
+vendor/
+
+# Fichiers temporaires et logs
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Fichiers d'environnement
+.env
+.env.local
+.env.production
+
+# Fichiers de cache et temporaires
+cache/
+tmp/
+temp/
+
+# Fichiers de sauvegarde et d'éditeur
+*.bak
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Fichiers divers et de développement
+autre/
+tests/
+docs/
+*.zip
+*.rar
+*.tar.gz
+
+# Scripts de développement et de debug
+test_*.php
+debug_*.php
+check_*.php
+remove_*.php
+
+# Fichiers de système Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Fichiers de système macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Fichiers de données sensibles
+uploads/
+storage/
+backups/
+
+# Fichiers de logs spécifiques
+error.log
+access.log
+debug.log
+
+# Résumés et documentation de développement
+CLEANUP_SUMMARY.md
+REFACTORING_SUMMARY.md
+TODO.md
+NOTES.md

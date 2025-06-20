@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../model/place.php';
-require_once __DIR__ . '/../model/vehicle.php';
+require_once __DIR__ . '/../model/Place.php';
+require_once __DIR__ . '/../model/Vehicle.php';
 
 class ParkingController {
     private $placeModel;
@@ -11,7 +11,8 @@ class ParkingController {
         $this->placeModel = new Place($pdo);
         $this->vehicleModel = new Vehicle($pdo);
     }
-      public function show() {
+    
+    public function show() {
         
         $user_vehicles = [];
         $user_id = $_SESSION['user_id'] ?? null;
@@ -21,8 +22,6 @@ class ParkingController {
         }
 
         $places_disponibles = $this->placeModel->getPlaceTypeStats();
-
-        $place_types = $this->placeModel->getPlaceTypes();
 
         include __DIR__ . '/../view/parking.php';
     }

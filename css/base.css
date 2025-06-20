@@ -1,0 +1,77 @@
+
+
+:root {
+  --primary: #0ea5e9;
+  --primary-dark: #0284c7;
+  --primary-light: #38bdf8;
+  --success: #06b6d4;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-light: rgba(255, 255, 255, 0.35);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+  --shadow: 0 4px 20px rgba(14, 165, 233, 0.15);
+  --shadow-hover: 0 8px 30px rgba(14, 165, 233, 0.2);
+  --blur: blur(20px);
+  --radius: 12px;
+  --transition: all 0.2s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  color: #222;
+  background: #f8fafb;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.bg-circles {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(20px);
+  opacity: 0.35;
+}
+
+.bg-circle.blue1 {
+  width: 420px; height: 420px;
+  background: #3a8dde;
+  top: -120px; left: -120px;
+}
+
+.bg-circle.blue2 {
+  width: 340px; height: 340px;
+  background: #1e3c72;
+  bottom: -100px; right: -100px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: #b2f2c9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #179c3c;
+  border-radius: 4px;
+}

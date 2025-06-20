@@ -1,19 +1,17 @@
 <?php
 
-require_once __DIR__ . '/../model/user.php';
-require_once __DIR__ . '/../model/place.php';
-require_once __DIR__ . '/../model/reservation.php';
+require_once __DIR__ . '/../model/User.php';
+require_once __DIR__ . '/../model/Place.php';
 
 class AdminController {
     private $userModel;
     private $placeModel;
-    private $reservationModel;
     
     public function __construct($pdo) {
         $this->userModel = new User($pdo);
         $this->placeModel = new Place($pdo);
-        $this->reservationModel = new Reservation($pdo);
-    }    public function show() {
+    }
+      public function show() {
         
         if (!isset($_SESSION['user_id'])) {
             $_SESSION['error'] = 'Vous devez être connecté';
@@ -28,49 +26,29 @@ class AdminController {
         }
 
         $usersPerPage = 15;
-        $currentUserPage = isset($_GET['page_num']) ? max(1, intval($_GET['page_num'])) : 1;
-        $userOffset = ($currentUserPage - 1) * $usersPerPage;
+        $currentPage = isset($_GET['page_num']) ? max(1, intval($_GET['page_num'])) : 1;
+        $offset = ($currentPage - 1) * $usersPerPage;
 
         $places_config = $this->placeModel->getPlaceTypes();
         $places_disponibles = $this->placeModel->getPlaceTypeStats();
 
-        $users = $this->userModel->getAllWithPagination($usersPerPage, $userOffset);
+        $users = $this->userModel->getAllWithPagination($usersPerPage, $offset);
         $totalUsers = $this->userModel->getTotalCount();
-        $totalUserPages = ceil($totalUsers / $usersPerPage);
+        $totalPages = ceil($totalUsers / $usersPerPage);
 
         $pagination = [
-            'current_page' => $currentUserPage,
-            'total_pages' => $totalUserPages,
+            'current_page' => $currentPage,
+            'total_pages' => $totalPages,
             'total_users' => $totalUsers,
             'users_per_page' => $usersPerPage,
-            'has_previous' => $currentUserPage > 1,
-            'has_next' => $currentUserPage < $totalUserPages,
-            'previous_page' => $currentUserPage - 1,
-            'next_page' => $currentUserPage + 1
-        ];
-
-        $page = isset($_GET['reservations_page']) ? (int)$_GET['reservations_page'] : 1;
-        $limit = 10;
-        $offset = ($page - 1) * $limit;
-
-        $reservations_data = $this->reservationModel->getAllWithPagination($limit, $offset);
-        $reservations = $reservations_data['reservations'];
-        $total_reservations = $reservations_data['total'];
-        $total_pages = ceil($total_reservations / $limit);
-
-        $pagination_reservations = [
-            'current_page' => $page,
-            'total_pages' => $total_pages,
-            'total_reservations' => $total_reservations,
-            'has_prev' => $page > 1,
-            'has_next' => $page < $total_pages,
-            'prev_page' => $page - 1,
-            'next_page' => $page + 1
+            'has_previous' => $currentPage > 1,
+            'has_next' => $currentPage < $totalPages,
+            'previous_page' => $currentPage - 1,
+            'next_page' => $currentPage + 1
         ];
 
         include __DIR__ . '/../view/admin.php';
-    }
-      public function updateUser() {
+    }    public function updateUser() {
         if (!$this->checkAdminAccess()) return;
         
         $id = $_POST['id'] ?? '';
@@ -137,22 +115,26 @@ class AdminController {
         header("Location: $redirectUrl");
         exit;
     }
-    
-    public function deleteUser() {
+      public function deleteUser() {
         if (!$this->checkAdminAccess()) return;
         
         $id = $_POST['id'] ?? '';
         $redirect = $_POST['redirect'] ?? 'admin';
+        $page_num = $_POST['page_num'] ?? 1;
         
         if (empty($id)) {
             $_SESSION['error'] = 'ID utilisateur manquant';
-            header("Location: ../index.php?page=$redirect");
+            $redirectUrl = "../index.php?page=$redirect";
+            if ($page_num > 1) $redirectUrl .= "&page_num=$page_num";
+            header("Location: $redirectUrl");
             exit;
         }
 
         if ($id == $_SESSION['user_id']) {
             $_SESSION['error'] = 'Vous ne pouvez pas supprimer votre propre compte';
-            header("Location: ../index.php?page=$redirect");
+            $redirectUrl = "../index.php?page=$redirect";
+            if ($page_num > 1) $redirectUrl .= "&page_num=$page_num";
+            header("Location: $redirectUrl");
             exit;
         }
         
@@ -163,7 +145,9 @@ class AdminController {
             $_SESSION['error'] = 'Erreur lors de la suppression : ' . $e->getMessage();
         }
         
-        header("Location: ../index.php?page=$redirect");
+        $redirectUrl = "../index.php?page=$redirect";
+        if ($page_num > 1) $redirectUrl .= "&page_num=$page_num";
+        header("Location: $redirectUrl");
         exit;
     }
     
