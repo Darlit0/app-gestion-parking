@@ -1,0 +1,145 @@
+
+
+.parking-place-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.parking-place-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.15);
+}
+
+.vehicle-card {
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2) !important;
+}
+
+.vehicle-action-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+}
+
+.vehicle-action-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.vehicle-main-icon {
+  font-size: 3rem;
+  opacity: 0.8;
+}
+
+.vehicle-icon-wrapper {
+  padding: 1rem;
+  border-radius: 50%;
+  background: rgba(var(--bs-primary-rgb), 0.1);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.vehicle-plate-display {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 3px solid #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  position: relative;
+}
+
+.vehicle-plate-display::before {
+  content: '';
+  position: absolute;
+  top: 0.3rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  height: 0.2rem;
+  background: #3498db;
+  border-radius: 0.1rem;
+}
+
+.vehicle-plate-number {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.vehicle-details-box {
+  background: rgba(var(--bs-light-rgb), 0.3);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid var(--bs-primary);
+}
+
+.vehicle-brand-model {
+  font-weight: 500;
+  color: var(--bs-body-color);
+}
+
+.vehicle-info-section {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.vehicle-card .badge.bg-primary {
+  background: linear-gradient(135deg, #007bff, #0056b3) !important;
+}
+
+.vehicle-card .badge.bg-warning {
+  background: linear-gradient(135deg, #ffc107, #e0a800) !important;
+  color: #212529 !important;
+}
+
+.vehicle-card .badge.bg-info {
+  background: linear-gradient(135deg, #17a2b8, #138496) !important;
+}
+
+.reservation-card {
+  border-left: 4px solid var(--bs-primary);
+  transition: all 0.3s ease;
+}
+
+.reservation-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-date h6 {
+  color: var(--bs-primary);
+  margin-bottom: 0.5rem;
+}
+
+.reservation-type-badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.badge.bg-dark {
+  background: #343a40 !important;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.badge.bg-dark:hover {
+  background: #23272b !important;
+}
+
+.badge.bg-primary.fs-6 {
+  font-size: 1rem !important;
+  padding: 0.5rem 1rem;
+}
